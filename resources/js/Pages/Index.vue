@@ -3,6 +3,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="$page.errors.email">
+                        {{ $page.errors.email[0] }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="$page.errors.password">
+                        {{ $page.errors.password[0] }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="row justify-content-center my-5">
                         <div class="col-md-6 col-sm-10 col-12 col-lg-6">
                             <div class="card">

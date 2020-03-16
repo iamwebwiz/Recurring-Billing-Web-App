@@ -49940,6 +49940,14 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./Dashboard": [
+		"./resources/js/Pages/Dashboard.vue",
+		1
+	],
+	"./Dashboard.vue": [
+		"./resources/js/Pages/Dashboard.vue",
+		1
+	],
 	"./Index": [
 		"./resources/js/Pages/Index.vue",
 		0
