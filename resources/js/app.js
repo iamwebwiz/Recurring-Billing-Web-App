@@ -9,6 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 import { InertiaApp } from '@inertiajs/inertia-vue';
 
+Vue.config.productionTip = false;
 Vue.use(InertiaApp);
 
 const app = document.getElementById('app');
