@@ -59,8 +59,15 @@
                             if (data.status === 'error') {
                                 console.log('Shit happens.');
                             } else {
-                                alert(data.message);
-                                location.reload();
+                                self.$swal({
+                                    icon: 'success',
+                                    title: 'Done!',
+                                    text: data.message
+                                }).then(result => {
+                                    if (result.value) {
+                                        location.reload();
+                                    }
+                                });
                             }
                         }).catch(err => console.log(err.response));
 
