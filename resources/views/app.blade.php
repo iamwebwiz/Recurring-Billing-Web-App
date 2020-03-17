@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="//js.paystack.co/v2/popup.js"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
