@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Relationship with the "Subscription" model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function subscription(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Subscription::class);
+    }
 }

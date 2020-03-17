@@ -28,7 +28,7 @@ class HomeController extends Controller
         return Inertia::render('Dashboard', [
             'planId' => config('recurring.paystack.plan_id'),
             'publicKey' => config('recurring.paystack.public_key'),
-            'authUser' => Auth::user(),
+            'authUser' => Auth::user()->load('subscription'),
         ]);
     }
 }

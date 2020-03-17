@@ -38,29 +38,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
   props: ['authUser', 'publicKey', 'planId'],
   data: function data() {
     return {
-      amount: 500
+      amount: 500,
+      processing: false
     };
   },
   methods: {
     subscribeToPlan: function subscribeToPlan() {
+      this.processing = true;
+      var self = this;
       var config = {
-        key: this.publicKey,
-        email: this.authUser.email,
-        amount: this.amount * 100,
+        key: self.publicKey,
+        email: self.authUser.email,
+        amount: self.amount * 100,
         currency: "NGN",
-        plan: this.planId,
+        plan: self.planId,
         ref: '' + Math.floor(Math.random() * 1000000000 + 1),
         // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
         callback: function callback(response) {
-          console.log('success. transaction ref is ' + response.reference);
+          axios.post('/api/subscriptions/store', {
+            planId: self.planId,
+            reference: response.reference,
+            userId: self.authUser.id
+          }).then(function (res) {
+            var data = res.data;
+
+            if (data.status === 'error') {
+              console.log('Shit happens.');
+            } else {
+              alert(data.message);
+              location.reload();
+            }
+          })["catch"](function (err) {
+            return console.log(err.response);
+          });
+          self.processing = false;
         },
         onClose: function onClose() {
           alert('window closed');
+          self.processing = false;
         }
       };
       var handler = PaystackPop.setup(config);
@@ -155,14 +176,23 @@ var render = function() {
                   _vm._v(" "),
                   _c("h4", { staticClass: "amount" }, [_vm._v("₦500")]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-lg btn-block btn-primary",
-                      on: { click: _vm.subscribeToPlan }
-                    },
-                    [_vm._v("Subscribe")]
-                  )
+                  !_vm.authUser.subscription
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-lg btn-block btn-primary",
+                          attrs: { disabled: _vm.processing },
+                          on: { click: _vm.subscribeToPlan }
+                        },
+                        [_vm._v("Subscribe")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.authUser.subscription
+                    ? _c("div", { staticClass: "alert alert-dark" }, [
+                        _vm._v("Subscribed")
+                      ])
+                    : _vm._e()
                 ])
               ])
             ])
