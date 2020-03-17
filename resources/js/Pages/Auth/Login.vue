@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <div class="row">
+            <div class="row py-5">
                 <div class="col-md-10">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="$page.errors.email">
                         {{ $page.errors.email[0] }}
@@ -43,7 +43,7 @@
 
 <script>
     export default {
-        name: "Index",
+        name: "Login",
         data: () => ({
             sending: false,
             form: {
