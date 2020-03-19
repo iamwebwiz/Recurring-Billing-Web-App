@@ -28,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
+    /**
+     * Share data across all views with Inertia.
+     *
+     * @return void
+     */
     public function registerInertia(): void
     {
         Inertia::share([
