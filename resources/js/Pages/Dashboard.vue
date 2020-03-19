@@ -3,21 +3,29 @@
         <div class="container">
             <div class="row py-5">
                 <div class="col-md-10 col-10">
-                    <h1>Dashboard</h1>
+                    <h1>
+                        Dashboard
+                        <span class="float-right">
+                            <inertia-link href="/logout" method="post" class="btn btn-danger">Logout</inertia-link>
+                        </span>
+                        <div class="clearfix"></div>
+                    </h1>
 
-                    <div class="alert alert-info">
+                    <hr>
+
+                    <div class="alert alert-info" v-if="!authUser.subscription">
                         Subscribe to our Home Tutoring plan today. We will charge you automatically after the
                         first payment till you decide to opt out.
                     </div>
 
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-md-4">
                             <div class="card shadow">
                                 <div class="card-body">
                                     <h3>Home Tutoring</h3>
                                     <h4 class="amount">&#8358;500</h4>
                                     <button class="btn btn-lg btn-block btn-primary" @click="subscribeToPlan" :disabled="processing" v-if="!authUser.subscription">Subscribe</button>
-                                    <div class="alert alert-dark" v-if="authUser.subscription">Subscribed</div>
+                                    <div class="alert alert-success font-weight-bold" v-if="authUser.subscription">Subscribed</div>
                                 </div>
                             </div>
                         </div>

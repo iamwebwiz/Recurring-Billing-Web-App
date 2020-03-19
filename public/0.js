@@ -39,6 +39,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
   props: ['authUser', 'publicKey', 'planId'],
@@ -71,8 +79,15 @@ __webpack_require__.r(__webpack_exports__);
             if (data.status === 'error') {
               console.log('Shit happens.');
             } else {
-              alert(data.message);
-              location.reload();
+              self.$swal({
+                icon: 'success',
+                title: 'Done!',
+                text: data.message
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
             }
           })["catch"](function (err) {
             return console.log(err.response);
@@ -160,15 +175,38 @@ var render = function() {
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row py-5" }, [
         _c("div", { staticClass: "col-md-10 col-10" }, [
-          _c("h1", [_vm._v("Dashboard")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "alert alert-info" }, [
-            _vm._v(
-              "\n                    Subscribe to our Home Tutoring plan today. We will charge you automatically after the\n                    first payment till you decide to opt out.\n                "
-            )
+          _c("h1", [
+            _vm._v("\n                    Dashboard\n                    "),
+            _c(
+              "span",
+              { staticClass: "float-right" },
+              [
+                _c(
+                  "inertia-link",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { href: "/logout", method: "post" }
+                  },
+                  [_vm._v("Logout")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "clearfix" })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
+          _c("hr"),
+          _vm._v(" "),
+          !_vm.authUser.subscription
+            ? _c("div", { staticClass: "alert alert-info" }, [
+                _vm._v(
+                  "\n                    Subscribe to our Home Tutoring plan today. We will charge you automatically after the\n                    first payment till you decide to opt out.\n                "
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "row mt-4" }, [
             _c("div", { staticClass: "col-md-4" }, [
               _c("div", { staticClass: "card shadow" }, [
                 _c("div", { staticClass: "card-body" }, [
@@ -189,9 +227,11 @@ var render = function() {
                     : _vm._e(),
                   _vm._v(" "),
                   _vm.authUser.subscription
-                    ? _c("div", { staticClass: "alert alert-dark" }, [
-                        _vm._v("Subscribed")
-                      ])
+                    ? _c(
+                        "div",
+                        { staticClass: "alert alert-success font-weight-bold" },
+                        [_vm._v("Subscribed")]
+                      )
                     : _vm._e()
                 ])
               ])
@@ -205,6 +245,113 @@ var render = function() {
 var staticRenderFns = []
 render._withStripped = true
 
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functional component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
 
 
 /***/ }),
