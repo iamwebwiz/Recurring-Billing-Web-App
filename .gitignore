@@ -11,6 +11,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .DS_Store
+composer.lock
 package-lock.json
 yarn.lock
 /.idea
