@@ -21,6 +21,7 @@
     "paths": {
         "/api/auth/login": {
             "post": {
+                "summary": "Log a user into the application.",
                 "operationId": "App\\Http\\Controllers\\API\\AuthController::login",
                 "parameters": [
                     {
@@ -49,14 +50,14 @@
                 }
             }
         },
-        "/api/auth/profile": {
-            "get": {
-                "operationId": "App\\Http\\Controllers\\API\\AuthController::profile",
+        "/api/auth/logout": {
+            "post": {
+                "summary": "Log user out of the application",
+                "operationId": "App\\Http\\Controllers\\API\\AuthController::logout",
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "path",
-                        "description": "The authenticated user's token",
+                        "name": "token",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -65,17 +66,90 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful"
+                        "description": "Successfully logged user out of the application"
+                    }
+                }
+            }
+        },
+        "/api/auth/profile": {
+            "get": {
+                "summary": "Get the user's profile",
+                "operationId": "App\\Http\\Controllers\\API\\AuthController::profile",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched user profile"
                     }
                 }
             }
         },
         "/api/": {
             "get": {
+                "summary": "Get info about the API",
                 "operationId": "App\\Http\\Controllers\\SubscriptionController::index",
                 "responses": {
                     "200": {
                         "description": "Welcome"
+                    }
+                }
+            }
+        },
+        "/api/subscriptions/store": {
+            "post": {
+                "summary": "Store a new subscription to the plan.",
+                "operationId": "App\\Http\\Controllers\\SubscriptionController::store",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "The authenticated user's token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "The authenticated user's id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "reference",
+                        "in": "query",
+                        "description": "The reference for this subscription",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "planId",
+                        "in": "query",
+                        "description": "The subscription plan id on paystack",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "PLN_x8la9ud66vnsv13"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully created a subscription"
                     }
                 }
             }
