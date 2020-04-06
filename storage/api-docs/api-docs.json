@@ -4,11 +4,8 @@
         "title": "Afrinvest Recurring Billing API",
         "description": "API documentation for recurring billing api",
         "contact": {
+            "name": "Ezekiel Oladejo",
             "email": "iamwebwiz@gmail.com"
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
         "version": "1.0.0"
     },
@@ -154,11 +151,5 @@
                 }
             }
         }
-    },
-    "tags": [
-        {
-            "name": "Recurring Billing",
-            "description": "API endpoints for recurring billing"
-        }
-    ]
+    }
 }
