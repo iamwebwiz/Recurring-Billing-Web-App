@@ -20,6 +20,11 @@ class Controller extends BaseController
      *      )
      * )
      *
+     * @OA\Tag(
+     *     name="Recurring Billing",
+     *     description="Endpoints in recurring billing app"
+     * )
+     *
      * @OA\Server(
      *      url=L5_SWAGGER_CONST_HOST,
      *      description="Demo API Server"

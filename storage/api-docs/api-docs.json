@@ -16,8 +16,11 @@
         }
     ],
     "paths": {
-        "/api/auth/login": {
+        "/api/auth/signin": {
             "post": {
+                "tags": [
+                    "Recurring Billing"
+                ],
                 "summary": "Log a user into the application.",
                 "operationId": "App\\Http\\Controllers\\API\\AuthController::login",
                 "parameters": [
@@ -47,8 +50,11 @@
                 }
             }
         },
-        "/api/auth/logout": {
+        "/api/auth/signout": {
             "post": {
+                "tags": [
+                    "Recurring Billing"
+                ],
                 "summary": "Log user out of the application",
                 "operationId": "App\\Http\\Controllers\\API\\AuthController::logout",
                 "parameters": [
@@ -70,6 +76,9 @@
         },
         "/api/auth/profile": {
             "get": {
+                "tags": [
+                    "Recurring Billing"
+                ],
                 "summary": "Get the user's profile",
                 "operationId": "App\\Http\\Controllers\\API\\AuthController::profile",
                 "parameters": [
@@ -91,6 +100,9 @@
         },
         "/api/": {
             "get": {
+                "tags": [
+                    "Recurring Billing"
+                ],
                 "summary": "Get info about the API",
                 "operationId": "App\\Http\\Controllers\\SubscriptionController::index",
                 "responses": {
@@ -102,6 +114,9 @@
         },
         "/api/subscriptions/store": {
             "post": {
+                "tags": [
+                    "Recurring Billing"
+                ],
                 "summary": "Store a new subscription to the plan.",
                 "operationId": "App\\Http\\Controllers\\SubscriptionController::store",
                 "parameters": [
@@ -151,5 +166,11 @@
                 }
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Recurring Billing",
+            "description": "Endpoints in recurring billing app"
+        }
+    ]
 }

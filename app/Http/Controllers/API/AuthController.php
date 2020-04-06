@@ -19,7 +19,8 @@ class AuthController extends Controller
      * Log a user into the application.
      *
      * @OA\Post(
-     *     path="/api/auth/login",
+     *     path="/api/auth/signin",
+     *     tags={"Recurring Billing"},
      *     @OA\Parameter(
      *          name="email",
      *          in="query",
@@ -65,7 +66,8 @@ class AuthController extends Controller
      * Log user out of the application
      *
      * @OA\Post(
-     *     path="/api/auth/logout",
+     *     path="/api/auth/signout",
+     *     tags={"Recurring Billing"},
      *     @OA\Parameter(
      *          name="token",
      *          in="query",
@@ -106,6 +108,7 @@ class AuthController extends Controller
      *
      * @OA\Get(
      *     path="/api/auth/profile",
+     *     tags={"Recurring Billing"},
      *     @OA\Parameter(
      *          name="token",
      *          in="query",

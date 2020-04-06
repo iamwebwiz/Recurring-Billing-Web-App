@@ -14,6 +14,7 @@ class SubscriptionController extends Controller
      *
      * @OA\Get(
      *     path="/api/",
+     *     tags={"Recurring Billing"},
      *     @OA\Response(response="200", description="Welcome")
      * )
      */
@@ -30,6 +31,7 @@ class SubscriptionController extends Controller
      *
      * @OA\Post(
      *     path="/api/subscriptions/store",
+     *     tags={"Recurring Billing"},
      *     @OA\Parameter(
      *          name="token",
      *          in="query",

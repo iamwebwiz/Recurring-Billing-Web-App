@@ -58,8 +58,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       sending: false,
       form: {
-        email: 'test@gmail.com',
-        password: 'password'
+        email: '',
+        password: ''
       }
     };
   },
@@ -165,7 +165,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "email", autofocus: "", id: "email" },
+                          attrs: { type: "email", id: "email" },
                           domProps: { value: _vm.form.email },
                           on: {
                             input: function($event) {

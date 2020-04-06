@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [SubscriptionController::class, 'index']);
 
 Route::prefix('auth')->group(static function () {
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('signin', [AuthController::class, 'login']);
+    Route::post('signout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::get('profile', [AuthController::class, 'profile']);
 });

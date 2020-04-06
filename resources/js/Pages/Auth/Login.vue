@@ -22,7 +22,7 @@
                                     <form @submit.prevent="submit">
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="email" v-model="form.email" autofocus id="email" class="form-control">
+                                            <input type="email" v-model="form.email" id="email" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Password</label>
@@ -47,8 +47,8 @@
         data: () => ({
             sending: false,
             form: {
-                email: 'test@gmail.com',
-                password: 'password',
+                email: '',
+                password: '',
             }
         }),
         methods: {
