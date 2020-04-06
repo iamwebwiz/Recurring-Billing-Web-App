@@ -1,0 +1,90 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Afrinvest Recurring Billing API",
+        "description": "API documentation for recurring billing api",
+        "contact": {
+            "email": "iamwebwiz@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "operationId": "App\\Http\\Controllers\\API\\AuthController::login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "The user's email address",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The user's password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Login"
+                    }
+                }
+            }
+        },
+        "/api/auth/profile": {
+            "get": {
+                "operationId": "App\\Http\\Controllers\\API\\AuthController::profile",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "path",
+                        "description": "The authenticated user's token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/api/": {
+            "get": {
+                "operationId": "App\\Http\\Controllers\\SubscriptionController::index",
+                "responses": {
+                    "200": {
+                        "description": "Welcome"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Recurring Billing",
+            "description": "API endpoints for recurring billing"
+        }
+    ]
+}
