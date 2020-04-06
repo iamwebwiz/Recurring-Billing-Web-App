@@ -41,8 +41,11 @@ class AuthController extends Controller
      *      ),
      *     @OA\Response(response="200", description="Successful Login")
      * )
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $credentials = $request->only(['email', 'password']);
 
@@ -58,7 +61,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
 
@@ -98,7 +101,7 @@ class AuthController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function refresh(Request $request)
+    public function refresh(Request $request): JsonResponse
     {
         return $this->respondWithToken(Auth::guard('api')->refresh());
     }
