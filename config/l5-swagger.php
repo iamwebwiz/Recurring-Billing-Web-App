@@ -172,7 +172,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', false),
+    'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -233,5 +233,6 @@ return [
      */
     'constants' => [
         'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
+        'PAYSTACK_PLAN_ID' => env('PAYSTACK_PLAN_ID'),
     ],
 ];

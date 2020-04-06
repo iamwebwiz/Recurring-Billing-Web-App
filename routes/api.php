@@ -21,7 +21,7 @@ Route::prefix('auth')->group(static function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::post('profile', [AuthController::class, 'profile']);
+    Route::get('profile', [AuthController::class, 'profile']);
 });
 
 Route::prefix('subscriptions')->group(static function () {
