@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -11,10 +12,12 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except('login');
+        $this->middleware('jwt.verify')->except('login');
     }
 
     /**
+     * Log a user into the application.
+     *
      * @OA\Post(
      *     path="/api/auth/login",
      *     @OA\Parameter(
@@ -58,7 +61,29 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    /**
+     * Log user out of the application
+     *
+     * @OA\Post(
+     *     path="/api/auth/logout",
+     *     @OA\Parameter(
+     *          name="token",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Successfully logged user out of the application"
+     *      )
+     * )
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function logout(Request $request): JsonResponse
     {
         auth()->logout();
 
@@ -69,7 +94,7 @@ class AuthController extends Controller
      * Refresh authentication token
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function refresh(Request $request)
     {
@@ -77,25 +102,29 @@ class AuthController extends Controller
     }
 
     /**
+     * Get the user's profile
+     *
      * @OA\Get(
      *     path="/api/auth/profile",
      *     @OA\Parameter(
-     *          name="Authorization",
-     *          in="path",
+     *          name="token",
+     *          in="query",
      *          required=true,
-     *          description="The authenticated user's token",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
      *     @OA\Response(
-     *          response="200",
-     *          description="Successful"
+     *          response=200,
+     *          description="Successfully fetched user profile"
      *      )
      * )
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function profile(Request $request)
+    public function profile(Request $request): JsonResponse
     {
-        return Response::json(Auth::user());
+        return Response::json($request->user());
     }
 }
