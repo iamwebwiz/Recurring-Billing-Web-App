@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 class SubscriptionController extends Controller
 {
     /**
+     * @OA\Get(
+     *     path="/api/",
+     *     @OA\Response(response="200", description="Welcome")
+     * )
+     */
+    public function index()
+    {
+        return response()->json(['api' => 'Afrinvest API']);
+    }
+
+    /**
      * Store a new subscription to the plan.
      *
      * @param Request $request
